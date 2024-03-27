@@ -13,6 +13,6 @@ if __name__ == "__main__":
     methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     print("Methods:")
     for method in methods:
-        print("    method GET:", logs.count_documents({ "method": method }))
+        print(f"    method {method}:", logs.count_documents({ "method": method }))
 
     print(logs.count_documents({ "method": "GET", "path": "/status" }), "status check")
