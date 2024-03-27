@@ -1,4 +1,4 @@
-#!/usr/bin/end python3
+#!/usr/bin/env python3
 """Module for a function that returns all students sorted by average score"""
 
 
