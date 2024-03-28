@@ -37,6 +37,11 @@ def reply(fn: Callable) -> None:
     key = fn.__qualname__
 
     num_calls = r.get(key)
+    try:
+        num_calls = num_calls.decode('utf-8')
+    except Exception:
+        num_calls = 0
+
     print(f"{key} was called {num_calls} times:")
 
     inputs = r.lrange(f"{key}:inputs", 0, -1)
