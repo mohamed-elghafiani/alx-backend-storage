@@ -29,6 +29,20 @@ def call_history(method: Callable) -> Callable:
 
     return wrapper
 
+def reply(fn: Callable) -> None:
+    """display the history of calls of @fn"""
+    r = redis.Redis()
+    key = fn.__qualname__
+
+    num_calls = r.get(key)
+    print(f"Cache.store was called {num_calls} times:")
+
+    inputs = r.lrange(f"{key}:inputs", 0, -1)
+    outputs = r.lrange(f"{key}:outputs", 0, -1)
+
+    for inp, out in zip(inputs, outputs):
+        print(f"Cache.store(*{inp.decode('utf-8')}) -> {out.decode('utf-8')}")
+
 
 class Cache():
     """a class for using redis as a simple cache"""
