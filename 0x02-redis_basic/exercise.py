@@ -2,18 +2,18 @@
 """Redis basic usage module"""
 import redis
 import uuid
-from typing import Union, Callable, Optional, TypeVar
+from typing import Union, Callable, Optional
 from functools import wraps
 
 
-def count_calls(f: Callable) -> Callable:
+def count_calls(method: Callable) -> Callable:
     """Return Wrapper for counting methods calls"""
-    @wraps(f)
+    @wraps(method)
     def wrapper(self, *args, **kwargs):
         """Wrapper function"""
-        self._redis.incr(f.__qualname__, 1)
+        self._redis.incr(method.__qualname__, 1)
 
-        return f(self, *args, **kwargs)
+        return method(self, *args, **kwargs)
 
     return wrapper
 
