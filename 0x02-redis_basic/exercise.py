@@ -8,6 +8,7 @@ from functools import wraps
 
 T = TypeVar('T', bound=Callable)
 
+
 def count_calls(f: T) -> T:
     """Return Wrapper for counting methods calls"""
     @wraps(f)
@@ -50,6 +51,6 @@ class Cache():
         """Retrieve a string value for a given key from the cache."""
         return self.get(key, fn=lambda x: x.decode('utf-8'))
 
-    def get_int(self, key:str) -> Optional[int]:
+    def get_int(self, key: str) -> Optional[int]:
         """Retrieve an int value for a given key from the cache."""
         return self.get(key, fn=int)
