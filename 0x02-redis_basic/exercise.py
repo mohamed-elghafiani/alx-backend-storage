@@ -56,7 +56,7 @@ def reply(fn: Callable) -> None:
             out = out.decode('utf-8')
         except Exception:
             out = ""
-        print(f"Cache.store(*{inp}) -> {out}")
+        print(f"{key}(*{inp}) -> {out}")
 
 
 class Cache():
