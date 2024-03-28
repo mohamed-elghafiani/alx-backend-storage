@@ -6,15 +6,12 @@ from typing import Union, Callable, Optional, TypeVar
 from functools import wraps
 
 
-T = TypeVar('T', bound=Callable)
-
-
-def count_calls(f: T) -> T:
+def count_calls(f: Callable) -> Callable:
     """Return Wrapper for counting methods calls"""
     @wraps(f)
     def wrapper(self, *args, **kwargs):
         """Wrapper function"""
-        self._redis.incrby(f.__qualname__, 1)
+        self._redis.incr(f.__qualname__, 1)
 
         return f(self, *args, **kwargs)
 
