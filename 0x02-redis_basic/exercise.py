@@ -2,7 +2,7 @@
 """Redis basic usage module"""
 import redis
 import uuid
-from typing import Union, Callable
+from typing import Union, Callable, Optional
 
 
 class Cache():
@@ -18,9 +18,14 @@ class Cache():
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Callable[[bytes], str]) -> str:
-        """Calls fun on the returned value of redis.get()"""
+    def get(self,
+            key: str,
+            fn: Optional[Callable[[bytes], Union[bytes, str, int]]] = None
+            ) -> Union[bytes, str, int, None]:
+        """Retrieve and optionally convert the value of a given key
+           from the cache
+        """
         value = self._redis.get(key)
-        if fn:
+        if value and fn:
             value = fn(value)
         return value
