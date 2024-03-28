@@ -37,7 +37,7 @@ def reply(fn: Callable) -> None:
     key = fn.__qualname__
 
     num_calls = r.get(key)
-    print(f"Cache.store was called {num_calls} times:")
+    print(f"{key} was called {num_calls} times:")
 
     inputs = r.lrange(f"{key}:inputs", 0, -1)
     outputs = r.lrange(f"{key}:outputs", 0, -1)
