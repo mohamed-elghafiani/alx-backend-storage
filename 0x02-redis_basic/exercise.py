@@ -17,7 +17,7 @@ def count_calls(f: T) -> T:
 
         return f(self, *args, **kwargs)
 
-    return cast(T, wrapper)
+    return wrapper
 
 
 class Cache():
