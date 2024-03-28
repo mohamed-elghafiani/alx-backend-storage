@@ -2,11 +2,13 @@
 """Redis basic usage module"""
 import redis
 import uuid
-from typing import Union, Callable, Optional
+from typing import Union, Callable, Optional, TypeVar
 from functools import wraps
 
 
-def count_calls(f: Callable):
+T = TypeVar('T', bound=Callable)
+
+def count_calls(f: T) -> T:
     """Return Wrapper for counting methods calls"""
     @wraps(f)
     def wrapper(self, *args, **kwargs):
@@ -15,7 +17,7 @@ def count_calls(f: Callable):
 
         return f(self, *args, **kwargs)
 
-    return wrapper
+    return cast(T, wrapper)
 
 
 class Cache():
