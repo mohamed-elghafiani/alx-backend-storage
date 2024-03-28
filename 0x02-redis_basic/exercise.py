@@ -41,7 +41,15 @@ def reply(fn: Callable) -> None:
     outputs = r.lrange(f"{key}:outputs", 0, -1)
 
     for inp, out in zip(inputs, outputs):
-        print(f"Cache.store(*{inp.decode('utf-8')}) -> {out.decode('utf-8')}")
+        try:
+            inp = inp.decode('utf-8')
+        except Exception:
+            inp = ""
+        try:
+            out = out.decode('utf-8')
+        except Exception:
+            out = ""
+        print(f"Cache.store(*{inp}) -> {out}")
 
 
 class Cache():
