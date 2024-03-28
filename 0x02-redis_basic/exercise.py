@@ -33,3 +33,7 @@ class Cache():
     def get_str(self, key: str) -> Optional[str]:
         """Retrieve a string value for a given key from the cache."""
         return self.get(key, fn=lambda x: x.decode('utf-8'))
+
+    def get_int(self, key:str) -> Optional[int]:
+        """Retrieve an int value for a given key from the cache."""
+        return self.get(key, fn=int)
