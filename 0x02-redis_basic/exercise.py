@@ -29,3 +29,7 @@ class Cache():
         if value and fn:
             value = fn(value)
         return value
+
+    def get_str(self, key: str) -> Optional[str]:
+        """Retrieve a string value for a given key from the cache."""
+        return self.get(key, fn=lambda x: x.decode('utf-8'))
